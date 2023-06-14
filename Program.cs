@@ -7,22 +7,24 @@ namespace Blog
 {
     class Program
     {
-        //Server=localhost,1433;Database=balta;User ID=sa;Password=1q2w3e4r@#$;Encrypt=false
         private const string CONNECTION_STRING = @"
             Server=localhost,1433;Database=Blog;User ID=sa;Password=1q2w3e4r@#$;Encrypt=false
         ";
         static void Main(string[] args)
         {
+            var connection = new SqlConnection(CONNECTION_STRING);
+            connection.Open();
             // ReadUsers();
             // ReadUser(1);
             // CreateUser();
             // UpdateUser(2);
-            DeleteUser(2);
+            // DeleteUser(2);
+            connection.Close();
         }
 
-        public static void ReadUsers()
+        public static void ReadUsers(SqlConnection connection)
         {
-            var repository = new UserRepository();
+            var repository = new UserRepository(connection);
             var users = repository.Get();
 
             foreach (var user in users)
