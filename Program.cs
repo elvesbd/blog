@@ -1,6 +1,4 @@
-﻿using Blog.Models;
-using Blog.Repositories;
-using Dapper.Contrib.Extensions;
+﻿using Blog.Repositories;
 using Microsoft.Data.SqlClient;
 
 namespace Blog

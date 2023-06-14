@@ -1,3 +1,4 @@
+using System.Data;
 using Blog.Models;
 using Dapper.Contrib.Extensions;
 using Microsoft.Data.SqlClient;
@@ -19,6 +20,30 @@ namespace Blog.Repositories
             => _connection.Get<User>(id);
 
         public void Create(User user)
-            => _connection.Insert(user);
+        {
+            user.Id = 0;
+            _connection.Insert(user);
+        }
+
+        public void Update(User user)
+        {
+            if (user.Id != 0)
+                _connection.Insert(user);
+        }
+
+        public void Delete(User user)
+        {
+            if (user.Id != 0)
+                _connection.Delete(user);
+        }
+
+        public void Delete(int id)
+        {
+            if (id != 0)
+                return;
+
+            var user = _connection.Get<User>(id);
+            _connection.Delete(user);
+        }
     }
 }
